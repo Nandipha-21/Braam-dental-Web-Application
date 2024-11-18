@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointments</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="Assets/sl.png" type="image/png">
+
+    <style>
+        #msg {
+            color: #007bff;
+            text-align: center;
+            margin: 0 auto;
+            width: 80%;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+
+        #greet {
+            color: #000000;
+            text-align: center;
+            margin: 0 auto;
+            width: 80%;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+
+        p {
+            color: #007bff;
+            text-align: center;
+            margin: 0 auto;
+            width: 80%;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="py-md-5 py-4 border-bottom">
+        <div class="container">
+            <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                <div class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-start text-md-left">
+                    <div class="icon d-flex justify-content-center align-items-center order-md-last">
+                        <span class="icon-map"></span>
+                    </div>
+                    <div class="pr-md-4 pl-md-0 pl-3 text">
+                        <p class="con"><span class="highlight">Call Us : </span> <i
+                                class="fa fa-light fa-phone fa-fade"></i></i><span></span></p>
+                        <p class="con"><span class="highlight">Location: </span> </i> 80 Jorissen St, Braamfontein,
+                            Johannesburg</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-center justify-content-center text-center">
+                    <a class="navbar-brand" href="home.html">Braamfontein<span>Dentist Clinic</span></a>
+                </div>
+                <div class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-end">
+                    <div class="icon d-flex justify-content-center align-items-center"><span
+                            class="icon-paper-plane"></span></div>
+                    <div class="text pl-3 pl-md-3">
+                        <p class="hr"><span class="highlight">Open Hours</span></p>
+                        <p class="time"><span class="highlight">Mon - Fri:</span> <span class="highlight">8:00am -
+                                5:00pm</span> Sun: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blue ftco-navbar-light" id="ftco-navbar">
+        <div class="container d-flex align-items-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item active"><a href="home.html" class="nav-link pl-0">Book Appointment</a></li>
+                    <li class="nav-item"><a href="upcomingAppointments.html" class="nav-link">Manage Appointments</a>
+                    </li>
+                    <li class="nav-item"><a href="educationalContent.html" class="nav-link">Educational Content</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-4">
+        <h1 id="msg"></h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 id="greet"></h2>
+            <button id="signOutBtn" class="btn btn-danger mt-3">Sign Out</button>
+        </div>
+        <h3 class="mt-4">Upcoming Appointments</h3>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered" id="appointmentsTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="updateMessage" class="alert alert-success" style="display: none;"></div>
+
+        <div id="cancelMessage" class="alert alert-danger" style="display: none;"></div>
+
+
+    </div>
+    <div class="modal fade" id="updateAppointmentModal" tabindex="-1" aria-labelledby="updateAppointmentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAppointmentModalLabel">Update Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateAppointmentForm">
+                        <div class="mb-3">
+                            <label for="updateDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="updateDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateStartTime" class="form-label">Start Time</label>
+                            <input type="time" class="form-control" id="updateStartTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appointmentType" class="form-label">Choose appointment type</label>
+                            <select class="form-control" id="appointmentType" required>
+                                <option value="Cleaning" data-duration="30">Teeth Cleaning (30 min)</option>
+                                <option value="Dental Checkup" data-duration="45">Dental Checkup (45 min)</option>
+                                <option value="Orthodontics" data-duration="20">Orthodontics (20 min)</option>
+                                <option value="Root Canal Therapy" data-duration="25">Root Canal Therapy (25 min)
+                                </option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, get, query, orderByChild, equalTo, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyALiVOPNJmuTJUl5XgOuYBQ14ZqcPw-DwQ",
+            authDomain: "malevolentmotion.firebaseapp.com",
+            databaseURL: "https://malevolentmotion-default-rtdb.firebaseio.com",
+            projectId: "malevolentmotion",
+            storageBucket: "malevolentmotion.appspot.com",
+            messagingSenderId: "243036520479",
+            appId: "1:243036520479:web:c767364f1ded2f96b4952a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+        let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+
+        let MsgHead = document.getElementById('msg');
+        let GreetHead = document.getElementById('greet');
+        let SignOutBtn = document.getElementById('signOutBtn');
+        let AppointmentsTable = document.getElementById('appointmentsTable').getElementsByTagName('tbody')[0];
+
+        let SignOut = () => {
+            signOut(auth).then(() => {
+                sessionStorage.removeItem("user-creds");
+                sessionStorage.removeItem("user-info");
+                window.location.href = 'login.html';
+            }).catch((error) => {
+                console.error('Sign out error:', error);
+            });
+        }
+
+        let CheckCred = () => {
+            if (!UserCreds) {
+                window.location.href = 'login.html';
+            } else {
+                GreetHead.innerText = `Welcome, ${UserInfo.firstname} ${UserInfo.lastname} ✨`;
+            }
+        }
+
+        let fetchUpcomingAppointments = async () => {
+            try {
+                console.log('Fetching upcoming appointments...');
+                const bookingsRef = ref(db, 'bookings');
+                const bookingQuery = query(bookingsRef, orderByChild('userId'), equalTo(UserCreds.uid));
+                const bookingSnapshot = await get(bookingQuery);
+
+                AppointmentsTable.innerHTML = '';
+
+                const today = new Date();
+
+                if (bookingSnapshot.exists()) {
+                    bookingSnapshot.forEach(childSnapshot => {
+                        let booking = childSnapshot.val();
+                        let appointmentDate = new Date(booking.date);
+
+                        let row = AppointmentsTable.insertRow();
+                        row.insertCell(0).innerText = booking.date;
+                        row.insertCell(1).innerText = booking.startTime;
+                        row.insertCell(2).innerText = booking.endTime; // Keep for display
+                        row.insertCell(3).innerText = booking.type;
+
+                        // Check if the appointment date has passed
+                        if (appointmentDate < today) {
+                            let statusCell = row.insertCell(4);
+                            statusCell.innerText = "Appointment Passed";
+                            statusCell.className = 'text-danger';
+                        } else {
+                            // Add 'Update' button if the appointment is upcoming
+                            let updateCell = row.insertCell(4);
+                            let updateButton = document.createElement('button');
+                            updateButton.className = 'btn btn-primary';
+                            updateButton.innerText = 'Update';
+                            updateButton.onclick = () => updateAppointment(childSnapshot.key, booking);
+                            updateCell.appendChild(updateButton);
+
+                            // Add 'Cancel' button
+                            let cancelButton = document.createElement('button');
+                            cancelButton.className = 'btn btn-danger ml-2';
+                            cancelButton.innerText = 'Cancel';
+                            cancelButton.onclick = () => cancelAppointment(childSnapshot.key);
+                            updateCell.appendChild(cancelButton);
+                        }
+                    });
+                } else {
+                    console.log('No upcoming appointments found.');
+                    let row = AppointmentsTable.insertRow();
+                    let cell = row.insertCell(0);
+                    cell.colSpan = 5;
+                    cell.innerText = 'No upcoming appointments';
+                    cell.className = 'text-center';
+                }
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+            }
+        };
+
+        let updateAppointment = (appointmentId, appointmentData) => {
+            // Populate the modal fields with existing appointment data
+            document.getElementById('updateDate').value = appointmentData.date;
+            document.getElementById('updateStartTime').value = appointmentData.startTime;
+
+            // Set the selected appointment type based on existing data
+            const appointmentTypeSelect = document.getElementById('appointmentType');
+            appointmentTypeSelect.value = appointmentData.type;  // Set the selected value
+
+            // Show the modal
+            const updateModal = new bootstrap.Modal(document.getElementById('updateAppointmentModal'));
+            updateModal.show();
+
+            // Handle form submission
+            const updateForm = document.getElementById('updateAppointmentForm');
+            updateForm.onsubmit = async (event) => {
+                event.preventDefault(); // Prevent form submission
+
+                const startTime = document.getElementById('updateStartTime').value;
+                const selectedType = appointmentTypeSelect.value;
+                const duration = appointmentTypeSelect.options[appointmentTypeSelect.selectedIndex].dataset.duration;
+
+                // Calculate end time based on selected type duration
+                const updatedData = {
+                    date: document.getElementById('updateDate').value,
+                    startTime: startTime,
+                    endTime: calculateEndTime(startTime, duration), // Pass duration for calculating end time
+                    type: selectedType,
+                };
+
+                // Merge updated data with the original appointmentData
+                const fullUpdatedData = {
+                    ...appointmentData,  // Spread the original data
+                    ...updatedData       // Overwrite only the updated fields
+                };
+
+                // Update appointment in Firebase
+                const appointmentRef = ref(db, `bookings/${appointmentId}`);
+                try {
+                    await set(appointmentRef, fullUpdatedData);  // Set the merged data
+                    console.log('Appointment updated successfully:', appointmentId);
+
+                    // Show success message
+                    const updateMessage = document.getElementById('updateMessage');
+                    updateMessage.innerText = 'Appointment updated successfully!';
+                    updateMessage.style.display = 'block';
+
+                    // Hide the message after 3 seconds
+                    setTimeout(() => {
+                        updateMessage.style.display = 'none';
+                    }, 3000);
+
+                    // Refresh the appointments table
+                    fetchUpcomingAppointments();
+                    updateModal.hide(); // Close the modal after successful update
+                } catch (error) {
+                    console.error('Error updating appointment:', error);
+                }
+            };
+        };
+
+        // Modify the calculateEndTime function to accept duration
+        const calculateEndTime = (startTime, duration) => {
+            const start = new Date(`1970-01-01T${startTime}:00`); // Assume date is the same
+            const end = new Date(start.getTime() + duration * 60000); // Add duration to start time
+            return end.toTimeString().slice(0, 5); // Return in HH:MM format
+        };
+
+
+        let cancelAppointment = async (appointmentId) => {
+            const appointmentRef = ref(db, `bookings/${appointmentId}`);
+            try {
+                await set(appointmentRef, null);  // Remove the appointment from Firebase
+                console.log('Appointment canceled successfully:', appointmentId);
+
+                // Show cancel success message
+                const cancelMessage = document.getElementById('cancelMessage');
+                cancelMessage.innerText = 'Appointment canceled successfully!';
+                cancelMessage.style.display = 'block';
+
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    cancelMessage.style.display = 'none';
+                }, 3000);
+
+                // Refresh the appointments table
+                fetchUpcomingAppointments();
+            } catch (error) {
+                console.error('Error canceling appointment:', error);
+            }
+        };
+
+
+
+        window.addEventListener('load', () => {
+            CheckCred();
+            fetchUpcomingAppointments();
+        });
+
+        SignOutBtn.addEventListener('click', SignOut);
+    </script>
+
+</body>
+
+</html>

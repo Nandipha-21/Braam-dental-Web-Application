@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="icon" href="Assets/sl.png" type="image/png"> 
+
+    <title>Braamfontein Dentist Clinic</title>
+    <style>
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+         
+        }
+        
+        .about__container {
+            padding: 80px 0;
+          
+            text-align: center;
+        }
+
+        .about__content {
+            max-width: 1000px;
+  
+            margin: 0 auto;
+        }
+
+        .about__content h2 {
+            font-size: 2.5rem;
+       
+            font-weight: bold;
+            color: #212529;
+        }
+
+        .about__content p {
+            font-size: 1.2rem;
+           
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+           
+        }
+
+        .about__image {
+            margin-top: 40px;
+        
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+       
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          
+        }
+
+        .about__slider {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+           
+        }
+
+        .slider__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .slider__image.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+   
+        .button__container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .appointment__btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: var(--primary-color);
+            
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .appointment__btn:hover {
+            background-color: var(--primary-color-dark);
+            
+        }
+
+        .appointment__link {
+            text-decoration: none;
+           
+        }
+
+        .section__header {
+
+            text-align: center;
+            margin-bottom: 2rem;
+          
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        #contact {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+        }
+
+        .footer-center {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .footer-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        iframe {
+            margin-top: 20px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .animated {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .section__container {
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+        }
+
+        .header__content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease, filter 1.5s ease;
+            filter: blur(10px);
+        }
+
+        .header__content.show {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        @keyframes collapseText {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="py-md-5 py-4 border-bottom">
+            <div class="container">
+                <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                    <div
+                        class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-start text-md-left">
+                        <div class="icon d-flex justify-content-center align-items-center order-md-last">
+                            <span class="icon-map"></span>
+                        </div>
+                        <div class="pr-md-4 pl-md-0 pl-3 text">
+                            <p class="con"><span class="highlight">Call Us : </span> <i
+                                    class="fa fa-light fa-phone fa-fade"></i></i><span>084 400 7446</span></p>
+                            <p class="con"><span class="highlight">Location: </span> </i> 80 Jorissen St, Braamfontein,
+                                Johannesburg</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="index.html" style="font-size: 35px;">Braamfontein<span>Dentist Clinic</span></a>
+                    </div>
+                    <div class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-end">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="icon-paper-plane"></span></div>
+                        <div class="text pl-3 pl-md-3">
+                            <p class="hr"><span class="highlight">Open Hours</span></p>
+                            <p class="time"><span class="highlight">Mon - Fri:</span> <span class="highlight">8:00am -
+                                    5:00pm</span> Sun: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-blue ftco-navbar-light" id="ftco-navbar">
+            <div class="container d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active"><a href="index.html" class="nav-link pl-0">Home</a></li>
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                        <li class="nav-item"><a href="#doctors" class="nav-link">Doctors</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+    </header>
+
+    <section class="section__container header__container" id="home">
+        <div class="header__content">
+            <h1>Welcome to the <span style="color: #007bff;">Braamfontein Dentist Clinic</span></h1>
+            <p>
+                At our Braamfontein dentist clinic, we prioritize exceptional patient experiences. With our
+                compassionate care,
+                cutting-edge facilities, and patient-centered approach, we are dedicated to your oral health and overall
+                well-being.
+                Trust us with your smile and experience the difference.
+            </p>
+            <button class="btn"><a href="login.html" style="color: inherit; text-decoration: none;">Book An
+                    Appointment</a></button>
+        </div>
+    </section>
+
+    <section class="section__container about__container" id="about">
+        <div class="about__content" >
+            <h2 class="animate" style="color: #007bff;">ABOUT US</h2>
+            <p class="animate">
+                Braamfontein Dentist Clinic, recently opened, is committed to serving the community with excellence. Our
+                mission is to provide high-quality dental care
+                in a comfortable and friendly environment. Despite being new to the area, our team brings years of
+                collective experience in dentistry.
+            </p>
+            <p class="animate">
+                We are dedicated to staying current with the <span style="color: #007bff;">latest advancements in dental
+                    technology </span>and treatments to
+                ensure that our patients receive the best care possible.
+                <span style="color: #007bff;">From routine checkups to advanced procedures,</span> we strive to exceed
+                expectations and make a positive
+                impact on oral health.
+            </p>
+        </div>
+        <div class="about__image animate">
+            <div class="about__slider">
+                <img src="Assets//Braamfontein-removebg-preview.png" alt="about 1" class="slider__image active" />
+                <img src="Assets/pexels (2).jpg" alt="about 2" class="slider__image" />
+                <img src="Assets/pexels.jpg" alt="about 2" class="slider__image" />
+                <img src="Assets/pexels (1).jpg" alt="about 2" class="slider__image" />
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.slider__image');
+            let currentIndex = 0;
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000); 
+        });
+
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    } else {
+                        entry.target.classList.remove('animated');
+                    }
+                });
+            });
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerContent = document.querySelector('.header__content');
+            const sectionContainer = document.querySelector('.section__container');
+
+            function checkScroll() {
+                const sectionTop = sectionContainer.getBoundingClientRect().top;
+                const triggerPoint = window.innerHeight - sectionTop;
+
+                if (triggerPoint > 100) {
+                    headerContent.classList.add('show');
+                } else {
+                    headerContent.classList.remove('show');
+                }
+            }
+
+            window.addEventListener('scroll', function () {
+                checkScroll();
+            });
+
+            checkScroll();
+        });
+    </script>
+
+
+    <section class="section__container service__container" id="services">
+        <div class="service__header animate">
+            <div class="service__header__content">
+                <h2 class="section__header" style="text-align: center; color: #007bff; font-weight: bold">OUR SPECIAL
+                    SERVICES</h2>
+            </div>
+            <p style="text-align:center;">
+                Beyond simply providing medical care, our commitment lies in delivering unparalleled service
+                tailored to your unique needs.
+            </p>
+        </div>
+        <div class="service__grid">
+            <div class="service__card animate">
+                <span><i class="ri-tooth-fill"></i></span>
+                <h4>Teeth Cleaning</h4>
+                <p>
+                    Enjoy a brighter smile with our professional teeth cleaning services, ensuring optimal oral hygiene.
+                </p>
+                <a href="https://my.clevelandclinic.org/health/treatments/11187-dental-check-up">Learn More</a>
+            </div>
+            <div class="service__card animate">
+                <span><i class="ri-hospital-fill"></i></span>
+                <h4>Dental Checkup</h4>
+                <p>
+                    Our comprehensive dental checkups ensure your teeth and gums are healthy, preventing future issues.
+                </p>
+                <a href="https://my.clevelandclinic.org/health/treatments/11187-dental-check-up">Learn More</a>
+            </div>
+
+            <div class="service__card animate">
+                <span><i class="ri-hand-heart-fill"></i></span>
+                <h4>Orthodontics</h4>
+                <p>
+                    Straighten your teeth and improve your bite with our personalized orthodontic treatments.
+                </p>
+                <a
+                    href="https://www.news-medical.net/health/What-is-Orthodontics.aspx#:~:text=The%20term%20%22orthodontics%22%20can%20be,straightening%20misaligned%20teeth%20or%20malocclusions.">Learn
+                    More</a>
+            </div>
+            <div class="service__card animate">
+                <span><i class="ri-stethoscope-fill"></i></span>
+                <h4>Root Canal Therapy</h4>
+                <p>
+                    Save your natural teeth with our pain-free root canal therapy, ensuring long-term dental health.
+                </p>
+                <a href="https://www.aae.org/patients/root-canal-treatment/what-is-a-root-canal/">Learn More</a>
+            </div>
+        </div>
+        <div class="button__container animate">
+            <a href="login.html" class="appointment__link">
+                <button class="appointment__btn">Book an Appointment</button>
+            </a>
+        </div>
+    </section>
+
+
+    <section class="section__container doctors__container" id="doctors">
+
+        <h2 class="section__header" style="text-align: center; color: #007bff;  font-weight: bold">OUR SPECIAL DOCTOR</h2>
+
+        <div class="doctors__grid">
+            <div class="doctors__card">
+                <div class ="doctors__card__image">
+                    <img src="Assets/floss.jpg" alt="Dr. Floss Scott" />
+                </div>
+                <h4>Dr. Floss</h4>
+                <p>Orthodontist</p>
+            </div>
+           
+        </div>
+    </section>
+    <section id="contact" class="animate"
+        style="display: flex; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+        <div class="col-md-6 animate">
+            <div class="footer-center animate">
+                <h3 class="footer-title" style="font-weight: bold; color: #007bff; font-size: 40px;">CONTACT US</h3>
+                <p><span class="highlight">Email:</span> info@braamfonteindentistclinic.com</p>
+                <p><span class="highlight">Phone:</span> 084 400 7446</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d223.7569172169285!2d28.03679775248052!3d-26.193077772403253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x168265a99b62c83%3A0xd0dc10146a7715a1!2sJuta%20Medical%20Centre!5e0!3m2!1sen!2sie!4v1717238173506!5m2!1sen!2sie"
+                    width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer" id="footer">
+        <div class="py-md-5 py-4 border-top">
+            <div class="container">
+                <div class="row d-flex justify-content-between align-items-start px-3 px-md-0">
+                    <div class="col-md d-flex flex-column">
+                        <div class="icon d-flex justify-content-center align-items-center mb-3"></div>
+                        <div class="text">
+                            <h3 class="footer-title">Braamfontein Dentist Clinic</h3>
+                            <p>We are honored to be a part of your healthcare journey and committed to delivering
+                                compassionate, personalized, and top-notch care every step of the way.</p>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex flex-column">
+                        <div class="icon d-flex justify-content-center align-items-center mb-3"></div>
+                        <div class="text">
+                            <h3 class="footer-title">Opening Hours</h3>
+                            <p><span class="highlight">Monday - Friday:</span> 8:00 AM - 5:00 PM</p>
+                            <p><span class="highlight">Saturday:</span> 9:00 AM - 2:00 PM</p>
+                            <p><span class="highlight">Sunday:</span> Closed</p>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex flex-column">
+                        <div class="text">
+                            <h3 class="footer-title">Quick Links</h3>
+                            <ul class="footer-links list-unstyled">
+                                <li><a href="#about">About Us</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#doctors">Doctors</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                                <li><a href="adminLogin.html">Admin </a></li>
+                                <li><a href="doctors.html">Doctors </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

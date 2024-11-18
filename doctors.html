@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="Assets/sl.png" type="image/png">
+   
+</head>
+
+<body>
+
+    <header>
+        <div class="py-md-5 py-4 border-bottom">
+            <div class="container">
+                <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                    <div
+                        class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-start text-md-left">
+                        <div class="icon d-flex justify-content-center align-items-center order-md-last">
+                            <span class="icon-map"></span>
+                        </div>
+                        <div class="pr-md-4 pl-md-0 pl-3 text">
+                            <p class="con"><span class="highlight">Call Us : </span> <i
+                                    class="fa fa-light fa-phone fa-fade"></i></i><span>084 400 7446</span></p>
+                            <p class="con"><span class="highlight">Location: </span> </i> 80 Jorissen St, Braamfontein,
+                                Johannesburg</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="index.html" style="font-size: 35px;">Braamfontein<span>Dentist
+                                Clinic</span></a>
+                    </div>
+                    <div class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-end">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="icon-paper-plane"></span></div>
+                        <div class="text pl-3 pl-md-3">
+                            <p class="hr"><span class="highlight">Open Hours</span></p>
+                            <p class="time"><span class="highlight">Mon - Fri:</span> <span class="highlight">8:00am -
+                                    5:00pm</span> Sun: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-blue ftco-navbar-light" id="ftco-navbar">
+            <div class="container d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active"><a href="index.html" class="nav-link pl-0">Home</a></li>
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                        <li class="nav-item"><a href="#doctors" class="nav-link">Doctors</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container login-container">
+        <section class="section__container login__container" id="login">
+            <h2 class="mb-3" style="color:#007bff; text-decoration:wavy;"> DOCTORS LOGIN </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="login__side-content p-4">
+                        <h3 style="color: #007bff;">WELCOME DOCTOR</h3>
+                        <p>
+                            Please sign in to manage your appointments, view your patient history, and more.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="login__content p-4">
+
+                        <form id="MainForm" class="w-100">
+                            <div class="form-floating mb-3">
+                                <label for="emailIn" style="color: #007bff;">Email address</label>
+                                <input type="email" class="form-control" id="emailIn" placeholder="name@example.com">
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="passwordIn" style="color: #007bff;">Password</label>
+                                <input type="password" class="form-control" id="passwordIn" placeholder="Password">
+
+                            </div>
+                            <div class="button__container">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                   
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyALiVOPNJmuTJUl5XgOuYBQ14ZqcPw-DwQ",
+            authDomain: "malevolentmotion.firebaseapp.com",
+            projectId: "malevolentmotion",
+            storageBucket: "malevolentmotion.appspot.com",
+            messagingSenderId: "243036520479",
+            appId: "1:243036520479:web:cca69670766a8d9cb4952a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const dbref = ref(db);
+
+        let EmailInp = document.getElementById('emailIn');
+        let passwordInp = document.getElementById('passwordIn');
+        let MainForm = document.getElementById('MainForm');
+
+        let SignInUser = evt => {
+            evt.preventDefault();
+
+            signInWithEmailAndPassword(auth, EmailInp.value, passwordInp.value)
+                .then((credentials) => {
+                    console.log('User signed in:', credentials);
+                    console.log('Fetching data for user UID:', credentials.user.uid);
+
+                    get(child(dbref, 'users/' + credentials.user.uid)).then((snapshot) => {
+                        if (snapshot.exists()) {
+                            const userInfo = {
+                                firstname: snapshot.val().firstName,
+                                lastname: snapshot.val().lastName
+                            };
+                            console.log('User data fetched:', userInfo);
+                            sessionStorage.setItem("user-info", JSON.stringify(userInfo));
+                            sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
+                            alert('User signed in successfully!');
+                            window.location.href = 'home.html';
+                        } else {
+                            alert('No user data found!');
+                        }
+                    }).catch((error) => {
+                        console.error('Error fetching user data:', error);
+                    });
+                })
+                .catch((error) => {
+                    alert(error.message);
+                    console.error('Sign-in error:', error);
+                });
+
+        }
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in, check if they're an admin
+                checkAdmin(user.uid);
+            } else {
+                // User is signed out, show user login form
+            }
+        });
+
+        MainForm.addEventListener('submit', SignInUser);
+    </script>
+</body>
+
+</html>

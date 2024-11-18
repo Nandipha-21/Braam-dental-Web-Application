@@ -1,0 +1,570 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-color: #007BFF;
+    /* Blue */
+    --primary-color-dark: #0056b3;
+    /* Darker Blue */
+    --primary-color-light: #e9f7f7;
+    /* Light Blue */
+    --secondary-color: #000000;
+    /* Black */
+    --text-dark: #000000;
+    /* Black */
+    --text-light: #767268;
+    /* Light Gray */
+    --white: #ffffff;
+    --max-width: 1200px;
+}
+
+
+/* About section */
+.about__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--primary-color-light);
+    /* Light Blue */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about__content h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    /* Blue */
+    margin-bottom: 1rem;
+}
+
+.about__content p {
+    color: var(--text-dark);
+    /* Black */
+}
+
+/* Service section */
+.service__header {
+
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+}
+
+.service__header__content p {
+    max-width: 600px;
+    color: var(--text-light);
+    /* Light Gray */
+    margin-bottom: 1rem;
+}
+
+.service__btn {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--primary-color);
+    /* Blue */
+    border: 1px solid var(--primary-color);
+    /* Blue */
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.service__btn:hover {
+    color: var(--white);
+    background-color: var(--primary-color-dark);
+    /* Darker Blue */
+}
+
+
+/* Service cards */
+.service__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service__card {
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service__card:hover {
+    transform: translateY(-5px);
+
+}
+
+.service__card span {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 10px 20px;
+    font-size: 2.5rem;
+    color: var(--primary-color-light);
+    /* Light Blue */
+    background-color: var(--primary-color);
+    /* Blue */
+    border-radius: 100px;
+    transition: background-color 0.3s ease;
+}
+
+.service__card h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    /* Black */
+    margin-bottom: 0.5rem;
+}
+
+.service__card p {
+    color: var(--text-light);
+    /* Light Gray */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.service__card a {
+    color: var(--primary-color);
+    /* Blue */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.service__card a:hover {
+    color: var(--primary-color-dark);
+    /* Darker Blue */
+}
+
+/* Animated border effect */
+.service__card::before,
+.service__card::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 1px solid rgba(0, 123, 255, 0.7);
+    transition: width 0.3s ease, height 0.3s ease;
+    /* Added transition for width and height */
+    pointer-events: none;
+    /* Ensure pseudo-elements don't interfere with hover */
+}
+
+.service__card::before {
+    top: 0;
+    left: 0;
+}
+
+.service__card::after {
+    bottom: 0;
+    right: 0;
+}
+
+.service__card:hover::before,
+.service__card:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* Doctors section */
+.doctors__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.section__container {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.doctors__header__content {
+    max-width: 600px;
+}
+
+.doctors__header__content p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.doctors__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.doctors__nav span {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.doctors__nav span:hover {
+    color: var(--primary-color-dark);
+}
+
+.doctors__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+
+.doctors__card {
+    flex: 1 1 calc(50% - 1rem);
+    text-align: center;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.doctors__card img {
+    width: 100%;
+    height: 400px;
+    /* Set a fixed height for the images */
+    object-fit: contain;
+    /* Ensure the image covers the entire container */
+    border-radius: 10px 10px 0 0;
+}
+
+.doctors__card h4 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    /* Black */
+}
+
+.doctors__card p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    /* Light Gray */
+}
+
+/* Footer section */
+.footer {
+    background-color: var(--primary-color-dark);
+    /* Darker Blue */
+    color: var(--white);
+
+}
+
+.navbar-brand {
+    display: inline-block;
+    text-align: center;
+    font-size: 2px;
+    font-weight: bold;
+}
+
+.navbar-brand span {
+    display: block;
+    font-size: .8rem;
+    font-weight: normal;
+    color: #999;
+}
+
+.bg-blue {
+    background-color: #007bff !important;
+
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: margin 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: rgba(255, 255, 255, 1);
+    margin-left: 15px;
+    margin-right: 15px;
+    transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+   
+}
+
+.navbar-nav {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navbar-nav * {
+    box-sizing: border-box;
+    transition: all .35s ease;
+}
+
+.nav-item {
+    display: inline-block;
+    list-style: none;
+    margin: 0.4em .8em;
+
+}
+
+/* Nav Link Styling */
+.nav-link {
+    padding: 0.5em 0.8em;
+    color: rgb(255, 255, 255) !important;
+    position: relative;
+    text-decoration: none;
+    font-size: 19px;
+}
+
+/* Nav Link Hover Effects */
+.nav-link::before,
+.nav-link::after {
+    content: '';
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    transition: all .3s ease;
+    opacity: 0;
+}
+
+/* Nav Link Before Pseudo Element */
+.nav-link::before {
+    right: 0;
+    top: 0;
+    border-top: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    transform: translate(-100%, 50%);
+}
+
+/* Nav Link After Pseudo Element */
+.nav-link::after {
+    left: 0;
+    bottom: 0;
+    border-bottom: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
+    transform: translate(100%, -50%);
+}
+
+/* Nav Link Hover Effects for Pseudo Elements */
+.nav-link:hover::before,
+.nav-link:hover::after {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+
+/* Nav Link Hover Color */
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Left and right elements */
+.icon {
+    font-size: 4px;
+    color: #007bff;
+}
+
+.con {
+    margin: 0;
+    font-size: 10px;
+    color: #333;
+}
+
+.hr {
+    margin: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.time {
+    margin: 0;
+    font-size: 10px;
+    color: #777;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+
+.bg-blue {
+    background-color: #007bff !important;
+   
+}
+
+
+.highlight {
+    font-weight: bold;
+    color: #007bff;
+    
+}
+
+.footer-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+
+
+.section__container {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.header__content {
+    max-width: 800px;
+    margin: 0 auto;
+
+}
+
+.header__content h1 {
+    font-size: 2.5rem;
+    /* Adjust size as needed */
+    font-weight: bold;
+    color: #000e1d;
+    text-transform: uppercase;
+}
+
+.header__content p {
+    font-size: 1.2rem;
+    /* Adjust size as needed */
+    color: #666;
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+
+}
+
+/* Login Section Styles */
+
+.login__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+.login__side-content {
+    background-color: #f8f9fa;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login__side-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.login__side-content p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.login__content {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login__content h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+
+.form-control {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+}
+
+.button__container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.ms-2 {
+    margin-left: 10px;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-floating::before,
+.form-floating::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+
+    transition: width 0.3s ease;
+    /* smooth transition */
+}
+
+.form-floating.animate::before {
+    width: 100%;
+}
+
+.form-floating.animate::after {
+    width: 100%;
+}

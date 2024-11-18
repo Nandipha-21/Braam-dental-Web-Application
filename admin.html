@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="Assets/sl.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-size: 2em;
+        }
+
+        #signOutBtn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #signOutBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #appointmentsList {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        #appointmentsList div {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #appointmentsList div p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 1em;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .accept-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .deny-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .reschedule-btn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background-color: #218838;
+        }
+
+        .deny-btn:hover {
+            background-color: #c82333;
+        }
+
+        .reschedule-btn:hover {
+            background-color: #e0a800;
+        }
+
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* CSS for the popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        /* Modal Background */
+        /* Modal Background */
+        #rescheduleModal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+
+            /* Ensure it appears above other content */
+            backdrop-filter: blur(8px);
+            /* Apply blur effect */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 550px;
+            /* Slightly wider for better content fit */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            color: #007bff;
+            /* Blue color */
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #0056b3;
+            /* Darker blue on hover */
+        }
+
+        /* Form Elements */
+        .modal-content input[type="date"],
+        .modal-content input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background: #007bff;
+            /* Blue color */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background: #0056b3;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="py-md-5 py-4 border-bottom">
+            <div class="container">
+                <div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+                    <div
+                        class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-start text-md-left">
+                        <div class="icon d-flex justify-content-center align-items-center order-md-last">
+                            <span class="icon-map"></span>
+                        </div>
+                        <div class="pr-md-4 pl-md-0 pl-3 text">
+                            <p class="con"><span class="highlight">Call Us : </span> <i
+                                    class="fa fa-light fa-phone fa-fade"></i></i><span>084 400 74460</span></p>
+                            <p class="con"><span class="highlight">Location: </span> </i> 80 Jorissen St, Braamfontein,
+                                Johannesburg</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="index.html" style="font-size: 35px;">Braamfontein<span>Dentist
+                                Clinic</span></a>
+                    </div>
+                    <div class="col-md-4 d-flex topper mb-md-0 mb-2 align-items-center justify-content-end">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="icon-paper-plane"></span></div>
+                        <div class="text pl-3 pl-md-3">
+                            <p class="hr"><span class="highlight">Open Hours</span></p>
+                            <p class="time"><span class="highlight">Mon - Fri:</span> <span class="highlight">8:00am -
+                                    5:00pm</span> Sun: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-blue ftco-navbar-light" id="ftco-navbar">
+            <div class="container d-flex align-items-center">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item"><a href="index.html" class="nav-link pl-0">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <h1>Admin Dashboard</h1>
+    <button id="signOutBtn">Sign Out</button>
+
+    <div>
+       
+
+        <label for="nameFilter">Filter by Name:</label>
+        <input type="text" id="nameFilter" placeholder="Enter Name">
+
+        <label for="dateFilter">Filter by Date:</label>
+        <input type="date" id="dateFilter">
+
+        <button onclick="filterBookings()">Filter</button>
+    </div>
+
+    <!-- Approval Popup -->
+    <div id="approvalPopup" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePopup">&times;</span>
+            <p>Appointment approved successfully!</p>
+        </div>
+    </div>
+
+
+    <table id="appointmentsTable">
+        <thead>
+            <tr>
+             
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="appointmentsList"></tbody>
+    </table>
+
+    <!-- Reschedule Modal -->
+    <div id="rescheduleModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeRescheduleModal()">&times;</span>
+            <h2 style="color:#007bff;">RESCHEDULE APPOINTMENT</h2>
+            <form id="rescheduleForm">
+                <label for="newDate">Select New Date:</label>
+                <input type="date" id="newDate" name="newDate" required>
+                <label for="newStartTime">Select New Start Time:</label>
+                <input type="time" id="newStartTime" name="newStartTime" required>
+                <label for="newEndTime">Select New End Time:</label>
+                <input type="time" id="newEndTime" name="newEndTime" required>
+                <button type="button" onclick="submitReschedule()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getDatabase, ref, get, query, orderByChild, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyALiVOPNJmuTJUl5XgOuYBQ14ZqcPw-DwQ",
+            authDomain: "malevolentmotion.firebaseapp.com",
+            databaseURL: "https://malevolentmotion-default-rtdb.firebaseio.com",
+            projectId: "malevolentmotion",
+            storageBucket: "malevolentmotion.appspot.com",
+            messagingSenderId: "243036520479",
+            appId: "1:243036520479:web:cca69670766a8d9cb4952a"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        let rescheduleKey = null;
+
+        // Sign-out function
+        const signOutBtn = document.getElementById('signOutBtn');
+        signOutBtn.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.href = 'login.html';
+            }).catch((error) => {
+                console.error('Sign out error:', error);
+            });
+        });
+
+        // Check if the user is authenticated and is an admin
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                fetchAppointments();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+
+
+        // Function to fetch and display appointments
+        async function fetchAppointments() {
+            try {
+                const bookingsRef = ref(db, 'bookings');
+                const usersRef = ref(db, 'users');
+
+                // Fetch both bookings and users data from Firebase
+                const [bookingsSnapshot, usersSnapshot] = await Promise.all([
+                    get(query(bookingsRef, orderByChild('date'))),
+                    get(usersRef)
+                ]);
+
+                // Create a user lookup object from usersSnapshot
+                const users = {};
+                usersSnapshot.forEach((childSnapshot) => {
+                    users[childSnapshot.key] = childSnapshot.val();
+                });
+
+                // Get the table body element to display appointments
+                const appointmentsList = document.getElementById('appointmentsList');
+                appointmentsList.innerHTML = ''; // Clear previous data
+
+                // Iterate through each appointment
+                bookingsSnapshot.forEach((childSnapshot) => {
+                    const appointment = childSnapshot.val();
+                    const appointmentKey = childSnapshot.key;
+                    let status = appointment.status || 'pending'; // Default to 'pending' if no status
+
+                    const user = users[appointment.userId] || {};
+                    const userFullName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+                    const userEmail = user.email || '';
+
+                    // Get the current date and time
+                    const currentDate = new Date();
+
+                    // Convert appointment date and time to Date object
+                    const appointmentDate = new Date(`${appointment.date}T${appointment.endTime}`);
+
+                    // Check if the appointment has passed and its status is 'Approved'
+                    if (appointmentDate < currentDate && status === 'approved') {
+                        status = 'Day Passed';
+                    }
+
+                    // Set status label and row color based on status
+                    const statusLabel = status === 'Day Passed' ? 'Day Passed' :
+                        status === 'rescheduled' ? 'Rescheduled' :
+                            status === 'canceled' ? 'Canceled' : status;
+
+                    let rowClass = '';
+                    if (status === 'Day Passed') {
+                        rowClass = 'table-secondary';  // Gray for passed appointments
+                    } else if (status === 'rescheduled') {
+                        rowClass = 'table-warning';  // Yellow for rescheduled appointments
+                    } else if (status === 'canceled') {
+                        rowClass = 'table-danger';  // Red for canceled appointments
+                    }
+
+                    // Append each appointment to the table
+                    appointmentsList.innerHTML += `
+                <tr class="${rowClass}">
+                   
+                    <td>${userFullName || 'N/A'}</td>
+                    <td>${appointment.date}</td>
+                    <td>${appointment.startTime} - ${appointment.endTime}</td>
+                    <td>${appointment.type}</td>
+                    <td>${statusLabel}</td>
+                    <td class="action-buttons">
+                        <button class="accept-btn" data-appointment-id="${appointmentKey}" onclick="approveAppointment('${appointmentKey}', '${userEmail}', '${userFullName}', this)">Approve</button>
+                       
+                        <button class="reschedule-btn" onclick="showRescheduleModal('${appointmentKey}')">Reschedule</button>
+                    </td>
+                </tr>
+            `;
+                });
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+            }
+        }
+
+        // Function to approve an appointment
+        async function approveAppointment(appointmentKey, userEmail, userFullName, buttonElement) {
+            console.log('Approving appointment:', appointmentKey);
+
+            try {
+                // Update appointment status in Firebase
+                const updates = { [`/bookings/${appointmentKey}/status`]: 'approved' };
+                await update(ref(db), updates);
+
+                // Send email via EmailJS
+                emailjs.send('service_vwhbb4c', 'template_9e5s32p', {
+                    to_email: userEmail,
+                    to_name: userFullName,
+                    message: 'Your appointment has been approved.'
+                }).then((response) => {
+                    console.log('Email sent successfully:', response.status, response.text);
+
+                    // Show approval popup
+                    document.getElementById('approvalPopup').style.display = 'block';
+
+                    // Remove the approve button
+                    if (buttonElement) {
+                        buttonElement.style.display = 'none'; // Hides the button
+                    }
+
+                    // Refresh appointments list
+                    fetchAppointments();
+                }, (error) => {
+                    console.error('Email send failed:', error);
+                });
+            } catch (error) {
+                console.error('Error approving appointment:', error);
+            }
+        }
+
+        // Function to deny an appointment
+        async function denyAppointment(appointmentKey, buttonElement) {
+            console.log('Denying appointment:', appointmentKey);
+
+            try {
+                // Update appointment status in Firebase
+                const updates = { [`/bookings/${appointmentKey}/status`]: 'denied' };
+                await update(ref(db), updates);
+
+                // Optionally, send an email notification to the user
+                const bookingsRef = ref(db, `bookings/${appointmentKey}`);
+                const bookingSnapshot = await get(bookingsRef);
+                const appointment = bookingSnapshot.val();
+
+                if (appointment && appointment.userId) {
+                    const usersRef = ref(db, `users/${appointment.userId}`);
+                    const userSnapshot = await get(usersRef);
+                    const user = userSnapshot.val();
+                    const userEmail = user.email || '';
+                    const userFullName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+
+                    emailjs.send('service_vwhbb4c', 'template_9e5s32p', {
+                        to_email: userEmail,
+                        to_name: userFullName,
+                        message: 'Your appointment has been denied.'
+                    }).then((response) => {
+                        console.log('Email sent successfully:', response.status, response.text);
+
+                        // Remove the deny button
+                        if (buttonElement) {
+                            buttonElement.style.display = 'none'; // Hides the button
+                        }
+
+                        // Refresh appointments list
+                        fetchAppointments();
+                    }, (error) => {
+                        console.error('Email send failed:', error);
+                    });
+                } else {
+                    console.error('No user found for appointment.');
+                }
+            } catch (error) {
+                console.error('Error denying appointment:', error);
+            }
+        }
+
+
+        // Function to hide the approval popup
+        document.getElementById('closePopup').onclick = function () {
+            document.getElementById('approvalPopup').style.display = 'none';
+        };
+
+
+        let currentAppointmentKey = '';
+
+        // Function to open the reschedule modal
+        function showRescheduleModal(appointmentKey) {
+            currentAppointmentKey = appointmentKey;
+            document.getElementById('rescheduleModal').style.display = 'block';
+        }
+
+        // Function to close the reschedule modal
+        function closeRescheduleModal() {
+            document.getElementById('rescheduleModal').style.display = 'none';
+        }
+
+        // Function to handle reschedule form submission
+        async function submitReschedule() {
+            const newDate = document.getElementById('newDate').value;
+            const newStartTime = document.getElementById('newStartTime').value;
+            const newEndTime = document.getElementById('newEndTime').value;
+
+            if (!newDate || !newStartTime || !newEndTime) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            try {
+                // Update appointment details in Firebase
+                const updates = {
+                    [`/bookings/${currentAppointmentKey}/date`]: newDate,
+                    [`/bookings/${currentAppointmentKey}/startTime`]: newStartTime,
+                    [`/bookings/${currentAppointmentKey}/endTime`]: newEndTime,
+                    [`/bookings/${currentAppointmentKey}/status`]: 'rescheduled'
+                };
+                await update(ref(db), updates);
+
+                // Fetch updated appointment details
+                const bookingsRef = ref(db, `bookings/${currentAppointmentKey}`);
+                const bookingSnapshot = await get(bookingsRef);
+                const appointment = bookingSnapshot.val();
+
+                if (appointment && appointment.userId) {
+                    const usersRef = ref(db, `users/${appointment.userId}`);
+                    const userSnapshot = await get(usersRef);
+                    const user = userSnapshot.val();
+                    const userEmail = user.email || '';
+                    const userFullName = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+
+                    // Send rescheduling email
+                    emailjs.send('service_vwhbb4c', 'template_nbkj9zm', {
+                        to_email: userEmail,
+                        to_name: userFullName,
+                        new_date: newDate,
+                        new_start_time: newStartTime,
+                        new_end_time: newEndTime,
+                        message: 'Your appointment has been rescheduled.'
+                    }).then((response) => {
+                        console.log('Email sent successfully:', response.status, response.text);
+
+                        // Close the modal
+                        closeRescheduleModal();
+
+                        // Refresh appointments list
+                        fetchAppointments();
+                    }, (error) => {
+                        console.error('Email send failed:', error);
+                    });
+                } else {
+                    console.error('No user found for appointment.');
+                }
+            } catch (error) {
+                console.error('Error rescheduling appointment:', error);
+            }
+        }
+
+        // Function to filter bookings
+        function filterBookings() {
+            const userFilter = document.getElementById('userFilter').value.toLowerCase();
+            const nameFilter = document.getElementById('nameFilter').value.toLowerCase();
+            const dateFilter = document.getElementById('dateFilter').value;
+
+            const appointmentsList = document.getElementById('appointmentsList');
+            const rows = appointmentsList.getElementsByTagName('tr');
+
+            for (const row of rows) {
+                const userId = row.cells[0].innerText.toLowerCase();
+                const name = row.cells[1].innerText.toLowerCase();
+                const date = row.cells[2].innerText;
+
+                const matchesUser = !userFilter || userId.includes(userFilter);
+                const matchesName = !nameFilter || name.includes(nameFilter);
+                const matchesDate = !dateFilter || date === dateFilter;
+
+                row.style.display = matchesUser && matchesName && matchesDate ? '' : 'none';
+            }
+        }
+
+        window.approveAppointment = approveAppointment;
+        window.denyAppointment = denyAppointment;
+        window.showRescheduleModal = showRescheduleModal;
+        window.submitReschedule = submitReschedule;
+        window.filterBookings = filterBookings;
+
+        // Get the modal element
+        const modal = document.getElementById('rescheduleModal');
+
+        // Get the close button element
+        const closeBtn = document.querySelector('.close');
+
+        // Function to show the modal
+        function showModal() {
+            modal.style.visibility = 'visible';
+            modal.style.opacity = '1'; // Optional: Add a fade-in effect
+        }
+
+        // Function to hide the modal
+        function hideModal() {
+            modal.style.visibility = 'hidden';
+            modal.style.opacity = '0'; // Optional: Add a fade-out effect
+        }
+
+        // Event listener for the close button
+        closeBtn.addEventListener('click', hideModal);
+
+        // Optional: Add functionality to show the modal (e.g., on a button click)
+        // document.getElementById('openModalButton').addEventListener('click', showModal);
+
+    </script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js'></script>
+    <script>
+        (function () {
+            emailjs.init('kOoOX2acful-fukSI');
+        })();
+    </script>
+
+</body>
+
+</html>
