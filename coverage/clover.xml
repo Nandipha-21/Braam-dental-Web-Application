@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1731672056671" clover="3.2.0">
+  <project timestamp="1731672056672" name="All files">
+    <metrics statements="11" coveredstatements="11" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2" elements="23" coveredelements="23" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1"/>
+    <file name="booking.js" path="C:\Users\RC_Student_lab\Downloads\project (5)\web_project\booking.js">
+      <metrics statements="11" coveredstatements="11" conditionals="10" coveredconditionals="10" methods="2" coveredmethods="2"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="5" type="stmt"/>
+      <line num="4" count="5" type="cond" truecount="6" falsecount="0"/>
+      <line num="10" count="3" type="cond" truecount="4" falsecount="0"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="17" count="3" type="stmt"/>
+      <line num="18" count="3" type="stmt"/>
+      <line num="19" count="3" type="stmt"/>
+      <line num="20" count="3" type="stmt"/>
+      <line num="21" count="3" type="stmt"/>
+    </file>
+  </project>
+</coverage>
